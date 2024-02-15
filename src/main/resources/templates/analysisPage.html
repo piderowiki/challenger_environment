@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/}" href="../static/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单网页</title>
+    <link rel="stylesheet" href="analysis.css">
+    <script src="analysis.js" defer></script>
+</head>
+<body>
+
+    <div class="total">
+        <div class="f1">
+            <div class="f1_1">
+                <img src="test/电.png" alt="Paris" >
+            </div>
+            能源管理-智慧能碳管理平台
+        </div>
+        <div class="f2">
+            <div class="f2_1">
+                
+                <div class="f2_1_1">
+                    <div class="f2_1_2_1">
+                        <div class="f2_1_2_1-button-1">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            用水总览
+                        </div>
+                        <div class="f2_1_2_1-button-2">
+                            <img src="test/电表.png" alt="Paris" width="20" height="20" align-items="center">
+                            用电总览
+                        </div>
+                        <div class="f2_1_2_1-button-3">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            碳排放总览
+                        </div>
+                        <div class="f2_1_2_1-button-4">
+                            <img src="test/报表.png" alt="Paris" width="20" height="20" align-items="center">
+                            报表
+                        </div>
+                        <div class="f2_1_2_1-button-5">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            数据分析
+                        </div>
+                        <div class="f2_1_2_1-button-6">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            实时报修
+                        </div>
+                    </div>
+                    <div class="f2_1_2_2">
+
+                    </div>
+                </div>
+            </div>
+            <div class="f2_2">
+                <div class="container">
+                    <div class="box">
+                        <div class="container_button">
+                            <button class="button1" onclick="selectAnalysis('用水')">用水分析</button>
+                            <button class="button2" onclick="selectAnalysis('用电')">用电分析</button>
+                            <button class="button3" onclick="selectAnalysis('碳排')">碳排分析</button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="container1"> 
+                            <h2>请选择时间</h2>
+                            <div>
+                                <label for="startDate">起始日期：</label>
+                                <input type="text" id="startDate" name="startDate" onfocus="showDatePicker('startDate')" placeholder="选择起始日期 年/月/日" >
+                                <span id="startDateError" class="error"></span>
+                            </div>
+                            <div>
+                                <label for="endDate">截至日期：</label>
+                                <input type="text" id="endDate" name="endDate" onfocus="showDatePicker('endDate')" placeholder="选择截至日期 年/月/日" >
+                                <span id="endDateError" class="error"></span>
+                            </div>
+                            <button class="button4" onclick="submitForm()" disabled>确认</button>
+                        </div>
+                    </div>
+                    <!-- 新增的大盒子 -->
+                    <div class="result-box" id="resultBox">
+                        <div class="result-content">
+                            <div class="result-content-1">
+                                <p id="selectedDates"></p>
+                                <div id="usageStatistics"></div>
+                                <p id="highExceptionDates"></p>
+                                <p id="lowExceptionDates"></p>
+                                <p id="solvedExceptionDates"></p>
+                                <p id="unsolvedExceptionDates"></p>
+                            </div>
+                            <!-- 新增的返回按钮 -->
+                            <div class="back-button" onclick="goBack()">返回</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

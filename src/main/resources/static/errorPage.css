@@ -1,0 +1,500 @@
+.total {
+  display: flex;
+  width: 100vw;
+  /* 设置宽度为视口宽度的100% */
+  height: 100vh;
+  flex-direction: column;
+  /*竖直排布*/
+}
+
+.f1 {
+  display: flex;
+  width: 100%;
+  height: 7%;
+  flex-direction: row;
+  /*横向排布*/
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  /*justify-content: center; /* 将子元素水平居中对齐 */
+  background-color: rgb(107, 18, 24);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  letter-spacing: 1px;
+  /* 指定一个固定的间距值为 2 像素 */
+  font-weight: bold;
+  /* 加粗字体 */
+
+}
+
+.f1_1 {
+  width: 3%;
+  height: 95%;
+  display: flex;
+  background-color: rgb(220, 220, 220);
+}
+
+.f1_1 img {
+  width: 100%;
+  /* 图片宽度相对于父元素宽度的50% */
+  height: 100%;
+  /* 图片高度相对于父元素高度的50% */
+}
+
+.f2 {
+  width: 100%;
+  height: 93%;
+  display: flex;
+  flex-direction: row;
+  /*横向排布*/
+  background-color: rgb(204, 195, 195);
+}
+
+.f2_1 {
+  width: 7%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /*横向排布*/
+  background-color: rgb(19, 18, 18);
+
+}
+
+.f2_1_1_pic {
+  width: 100%;
+  height: 100%;
+}
+
+.f2_1_1 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  /*横向排布*/
+
+}
+
+.f2_1_2_1 {
+
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /*纵向排布*/
+  background-color: rgb(212, 212, 212);
+
+}
+
+.f2_1_2_2 {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(212, 212, 212);
+}
+
+
+.f2_1_2_1-button-1 {
+  /*用水总览*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  margin-bottom: 10px;
+}
+
+.f2_1_2_1-button-2 {
+  /*用电总览*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  margin-bottom: 10px;
+}
+
+.f2_1_2_1-button-3 {
+  /*碳排放总览*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: 10px;
+
+}
+
+.f2_1_2_1-button-4 {
+  /*报表*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  margin-bottom: 10px;
+}
+
+.f2_1_2_1-button-5 {
+  /*数据分析*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: 10px;
+
+}
+
+.f2_1_2_1-button-5 {
+  /*数据分析*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: 10px;
+
+}
+
+
+.f2_1_2_1-button-6 {
+  /*实时报修*/
+  width: 100%;
+  height: 15%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  align-items: center;
+  /* 将子元素垂直居中对齐 */
+  justify-content: center;
+  /* 将子元素水平居中对齐 */
+  flex-direction: row;
+  /*垂直放置*/
+  background-color: rgb(0, 0, 0);
+  /* 设置按钮背景颜色 */
+  color: white;
+  /* 设置按钮文本颜色 */
+  font-size: 16px;
+  /* 设置按钮文本字体大小 */
+  writing-mode: vertical-rl;
+  /*文字垂直排列*/
+  border: none;
+  /* 移除按钮边框 */
+  cursor: pointer;
+  /* 设置鼠标悬停样式为手型 */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  margin-bottom: 10px;
+}
+
+.f2_2 {
+  display: flex;
+  width: 93%;
+  height: 100%;
+  display: flex;
+  /* 启用弹性盒子布局 */
+  flex-direction: column;
+  /*垂直放置*/
+  background-color: rgb(212, 212, 212);
+  /* 设置按钮背景颜色 */
+}
+
+.f2_2_1 {
+  width: 100%;
+  height: 30%;
+  background-color: aqua;
+}
+
+.f2_2_2 {
+  width: 100%;
+  height: 70%;
+  background-color: rgb(204, 17, 17);
+}
+
+/* 按钮样式 */
+.round-button {
+  width: 80px;
+  /* 按钮宽度 */
+  height: 50px;
+  /* 按钮高度 */
+  border-radius: 50%;
+  /* 将按钮变成圆形 */
+  background-color: aqua;
+  /* 背景颜色 */
+  color: rgb(0, 0, 0);
+  /* 文字颜色 */
+  text-align: center;
+  /* 文字居中 */
+  line-height: 10px;
+  /* 垂直居中文字 */
+  font-size: 20px;
+  /* 字体大小 */
+  position: relative;
+  /* 设置相对定位，用于放置文字 */
+  display: inline-block;
+  /* 行内块元素，使得按钮在同一行显示 */
+  position: relative;
+  /* 设置绝对定位 */
+  top: 3%;
+  /* 距离顶部的距离 */
+  left: 1%;
+  /* 距离左侧的距离 */
+  cursor: pointer;
+  /* 设置光标形状为小手 */
+}
+
+/* 第二个按钮的样式 */
+.round-button2 {
+  width: 80px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: aqua;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  line-height: 10px;
+  font-size: 20px;
+  position: relative;
+  display: inline-block;
+  position: relative;
+  /* 设置绝对定位 */
+  top: 3%;
+  /* 距离顶部的距离 */
+  left: 3%;
+  /* 距离左侧的距离 */
+  cursor: pointer;
+  /* 设置光标形状为小手 */
+}
+
+table {
+  border-collapse: collapse;
+  /* 设置表格边框合并 */
+  border-width: 20px;
+  /* 设置表格边框宽度 */
+  width: 100%;
+  /* 设置表格宽度为容器的50% */
+  height: 400px;
+  /* 设置表格高度为200px */
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  /* 设置表格边框 */
+  padding: 5px;
+  /* 设置单元格内边距 */
+  text-align: center;
+  /* 文字居中对齐 */
+}
+
+.top-left {
+  position: relative;
+  /* 设置绝对定位 */
+  top: 0px;
+  /* 距离顶部的距离为0 */
+  left: 20px;
+  /* 距离左侧的距离为0 */
+  font-size: 20px;
+  /* 设置字体大小为24像素 */
+}
+
+.top-right {
+  position: relative;
+  /* 设置绝对定位 */
+  top: 0px;
+  /* 距离顶部的距离为0 */
+  right: 420px;
+  /* 距离左侧的距离为0 */
+  font-size: 20px;
+  /* 设置字体大小为24像素 */
+}
+
+select {
+  position: absolute;
+  /* 设置为绝对定位 */
+  top: 20px;
+  /* 距离顶部的距离为100像素 */
+  left: 120px;
+  /* 距离左侧的距离为200像素 */
+  /* 自定义下拉菜单的外观 */
+  width: 200px;
+  /* 设置宽度 */
+  height: 30px;
+  /* 设置高度 */
+  padding: 5px;
+  /* 设置内边距 */
+  border: none;
+  /* 去除边框 */
+  background-color: #f1f1f1;
+  /* 设置背景色 */
+  color: #333;
+  /* 设置文字颜色 */
+  font-family: Arial, sans-serif;
+  /* 设置字体 */
+  font-size: 16px;
+  /* 设置字体大小 */
+  appearance: none;
+  /* 隐藏默认样式 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="%23333" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.container {
+  display: flex;
+  /* 启用 Flexbox 布局 */
+  justify-content: space-between;
+  /* 在两个下拉菜单之间均匀分布空间 */
+}
+
+/* 分页样式 */
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  margin: 0 4px;
+}
+
+.pagination a:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination .active {
+  background-color: #4CAF50;
+  color: white;
+  cursor: default;
+}
+
+/* 页码显示样式 */
+.page-number {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border: 1px solid #ffffff;
+}

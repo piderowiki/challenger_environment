@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/}" href="../static/">
+    <link rel="stylesheet" href="errorPage.css">
+    <!-- <script src="test.js" defer="defer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="total">
+        <div class="f1">
+            <div class="f1_1">
+                <img src="test/电.png" alt="Paris">
+            </div>
+            能源管理-智慧能碳管理平台
+        </div>
+        <div class="f2">
+            <div class="f2_1">
+
+                <div class="f2_1_1">
+                    <div class="f2_1_2_1">
+                        <div class="f2_1_2_1-button-1">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            用水总览
+                        </div>
+                        <div class="f2_1_2_1-button-2">
+                            <img src="test/电表.png" alt="Paris" width="20" height="20" align-items="center">
+                            用电总览
+                        </div>
+                        <div class="f2_1_2_1-button-3">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            碳排放总览
+                        </div>
+                        <div class="f2_1_2_1-button-4">
+                            <img src="test/报表.png" alt="Paris" width="20" height="20" align-items="center">
+                            报表
+                        </div>
+                        <div class="f2_1_2_1-button-5">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            数据分析
+                        </div>
+                        <div class="f2_1_2_1-button-6">
+                            <img src="test/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            实时报修
+                        </div>
+                    </div>
+                    <div class="f2_1_2_2">
+
+                    </div>
+                </div>
+            </div>
+            <div class="f2_2">
+                <div class="f2_2_1">
+                    <div class="container">
+                        <div class="top-left">
+                            <p>电表位置</p>
+                            <select name="select1" id="select1">
+                                <option value="option1">区域A</option>
+                                <option value="option2">区域B</option>
+                                <option value="option3">区域C</option>
+                            </select>
+                        </div>
+                        <div class="top-right">
+                            <p>电表状态</p>
+                            <select name="select2" id="select2">
+                                <option value="option4">待维修</option>
+                                <option value="option5">已维修</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="round-button">查询</button>
+                    <button class="round-button2">重置</button>
+                </div>
+                <div class="f2_2_2">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>电表位置</th>
+                            <th>保修时间</th>
+                            <th>更新时间</th>
+                            <th>故障原因</th>
+                            <th>维修状态</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td></td>
+                            <td></td>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td></td>
+                            <td></td>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td></td>
+                            <td></td>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td></td>
+                            <td></td>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <a href="#">&laquo; 上一页</a> <!-- 左箭头表示上一页 -->
+                    <span>第
+                        <?php echo $currentPage; ?>
+                        页
+                    </span> <!-- 后台动态生成当前页数 -->
+                    <a href="#">下一页 &raquo;</a> <!-- 右箭头表示下一页 -->
+                </div>
+                <div id="page-number" class="page-number"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

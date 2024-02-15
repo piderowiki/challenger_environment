@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <base th:href="@{/}" href="../static/">
+    <link rel="stylesheet" href="change.css">
+    <script src="test.js" defer="defer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--此处用来存放变量-->
+    <script type="text/javascript">
+        thisYear = [[${ThisDateYear}]];
+        thisMonth = [[${ThisDateMonth}]];
+        thisWeek = [[${ThisDateWeek}]];
+        thisDay = [[${ThisDateDay}]];
+        thisType = [[${type}]];
+        // 0是year,1是month,2是week,3是day
+        chooseType = 0;
+    </script>
+
+    <script src="chartPageMain.js" defer = "defer"></script>
+</head>
+<body>
+    <div class="total">
+        <div class="f1">
+            <div class="f1_1">
+                <img src="picture/电.png" alt="Paris" >
+            </div>
+            能源管理-智慧能碳管理平台
+        </div>
+        <div class="f2">
+            <div class="f2_1">
+                
+                <div class="f2_1_1">
+                    <div class="f2_1_2_1">
+                        <div class="f2_1_2_1-button-1">
+                            <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            用水总览
+                        </div>
+                        <div class="f2_1_2_1-button-2">
+                            <img src="picture/电表.png" alt="Paris" width="20" height="20" align-items="center">
+                            用电总览
+                        </div>
+                        <div class="f2_1_2_1-button-3">
+                            <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            碳排放总览
+                        </div>
+                        <div class="f2_1_2_1-button-4">
+                            <img src="picture/报表.png" alt="Paris" width="20" height="20" align-items="center">
+                            报表
+                        </div>
+                        <div class="f2_1_2_1-button-5">
+                            <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            数据分析
+                        </div>
+                        <div class="f2_1_2_1-button-6">
+                            <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                            实时报修
+                        </div>
+                    </div>
+                    <div class="f2_1_2_2">
+
+                    </div>
+                </div>
+            </div>
+            <div class="f2_2">
+                <div class="f2_2_1">
+                    <div class="f2_2_1_1_select">
+                        
+                        <div class="f2_2_2_1-year" th:id="year_btn">
+                            年
+                        </div>
+                        <div class="f2_2_2_1-month" th:id="month_btn">
+                            月
+                        </div>
+                        <div class="f2_2_2_1-week" th:id="week_btn">
+                            周
+                        </div>
+                        <div class="f2_2_2_1-day" th:id="day_btn" >
+                            日
+                        </div>
+
+
+                            <div class="f2_2_1_1_select_1">
+                                
+                                <input type="text" id="textbox" th:id="yearInput" name="textbox" placeholder="年">
+                
+                            </div>
+                            <div class="f2_2_1_1_select_2">
+                                <input type="text" id="textbox" th:id="monthInput" name="textbox" placeholder="月">
+                            </div>
+                            <div class="f2_2_1_1_select_2">
+                                <input type="text" id="textbox" th:id="dayInput" name="textbox" placeholder="日">
+                            </div>
+
+                            <div class="f2_2_1_1_select_2">
+                                <input type="submit" th:id="submit_btn" value="提交">
+                            </div>
+
+                    </div>
+                    <div class="f2_2_1_2">
+                        <div class="f2_2_1_2_1">
+                            <div class="f2_2_1_2_1_1">
+                                <div class="f2_2_1_2_1_1_buttom_left">
+                                    <img src="picture/left.png" alt="Paris" th:id="leftBtn"  align-items="center">
+                                </div>
+                            </div>
+
+                            <div class="f2_2_1_2_1_2" id="f2_2_1_2_1_2"></div>
+                            <div class="f2_2_1_2_1_3" id="f2_2_1_2_1_3"></div>
+                            <div class="f2_2_1_2_1_4">
+                                <div class="f2_2_1_2_1_4_buttom_right">
+                                    <img src="picture/right.png" alt="Paris" th:id="rightBtn"  align-items="center">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="f2_2_1_2_2" id="f2_2_1_2_2">
+                            <div class="f2_2_1_2_2_buttom_left" th:id="areaLeftBtn">
+                                <img src="picture/left.png" alt="Paris"  align-items="center"
+                                >
+                            </div>
+                            
+                            <canvas id="canvas_f2_2_1_2_2"></canvas>
+                            <div class="f2_2_1_2_2_buttom_right" th:id="areaRightBtn">
+                                <img src="picture/right.png" alt="Paris"  align-items="center"
+                                     th:id="areaBtn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="f2_2_2">
+                    <div class="f2_2_2_1" id="f2_2_2_1">
+                      
+                        <p>今年 <span class="f2_2_2_1_1" id="年">100</span> mm</p>
+                        <p>今月 <span class="f2_2_2_1_1">100</span> mm</p>
+                        <p>今周 <span class="f2_2_2_1_1">100</span> mm</p>
+                        <p>今日 <span class="f2_2_2_1_1">100</span> mm</p>
+                       
+                    </div>
+                    <div class="f2_2_2_2">
+                        <div class="f2_2_2_2_1">
+                            异常总结
+                        </div>
+                    </div>
+                </div>
+
+        
+
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

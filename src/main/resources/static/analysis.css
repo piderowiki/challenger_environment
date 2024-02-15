@@ -1,0 +1,466 @@
+.total{
+    display: flex;
+    width: 98vw; /* 设置宽度为视口宽度的100% */
+    height: 97vh;
+    flex-direction: column;/*竖直排布*/
+}
+.f1 {
+    display: flex;
+    width: 100%;
+    height: 7%;
+    flex-direction: row;/*横向排布*/
+    align-items: center; /* 将子元素垂直居中对齐 */
+    /*justify-content: center; /* 将子元素水平居中对齐 */
+    background-color: rgb(107, 18, 24);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    letter-spacing: 1px; /* 指定一个固定的间距值为 2 像素 */
+    font-weight: bold; /* 加粗字体 */  
+}
+.f1_1{
+    width: 3%;
+    height: 95%;
+    display: flex;
+    background-color: rgb(220, 220, 220);
+}
+.f1_1 img {
+    width: 100%; /* 图片宽度相对于父元素宽度的50% */
+    height: 100%; /* 图片高度相对于父元素高度的50% */
+}
+.f2{
+    width: 100%;
+    height: 93%;
+    display: flex;
+    flex-direction: row;/*横向排布*/
+    background-color: rgb(204, 195, 195);
+}
+.f2_1{
+    width: 7%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;/*横向排布*/
+    background-color: rgb(19, 18, 18);
+}
+.f2_1_1_pic{
+    width: 100%;
+    height: 100%;
+}
+.f2_1_1{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;/*横向排布*/
+}
+.f2_1_2_1{
+
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;/*纵向排布*/
+    background-color: rgb(212, 212, 212);
+    
+}
+.f2_1_2_2{
+    width: 50%;
+    height: 100%;
+    background-color: rgb(212, 212, 212);
+}
+.f2_1_2_1-button-1{/*用水总览*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color: rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+  margin-bottom: 10px;
+}
+.f2_1_2_1-button-2{/*用电总览*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color: rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+}
+.f2_1_2_1-button-3{/*碳排放总览*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color: rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+
+}
+.f2_1_2_1-button-4{/*报表*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color:rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+}
+.f2_1_2_1-button-5{/*数据分析*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color: rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+
+}
+
+.f2_1_2_1-button-5{/*数据分析*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color:rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+
+}
+
+
+.f2_1_2_1-button-6{/*实时报修*/
+    width: 100%;
+    height: 15%;
+    display: flex; /* 启用弹性盒子布局 */
+    align-items: center; /* 将子元素垂直居中对齐 */
+    justify-content: center; /* 将子元素水平居中对齐 */
+    flex-direction: row;/*垂直放置*/
+    background-color:rgb(0, 0, 0); /* 设置按钮背景颜色 */
+    color: white; /* 设置按钮文本颜色 */
+    font-size: 16px; /* 设置按钮文本字体大小 */
+    writing-mode:vertical-rl;/*文字垂直排列*/
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 设置鼠标悬停样式为手型 */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.f2_2{
+    display:flex;
+    width: 93%;
+    height: 100%;
+    display: flex; /* 启用弹性盒子布局 */
+    flex-direction: column;/*垂直放置*/
+    background-color: rgb(212,212,212); /* 设置按钮背景颜色 */
+}
+
+.container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 80%; /* 设置两列的比例 */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.box {
+    height: 100%;
+    background-color: #fdfefe;
+}
+
+.box:nth-child(2) {
+    background-color: #fdfefe;
+}
+/* 包含按钮 */
+.container_button {
+    width: 100%;
+    height: 48vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 创建按钮样式 */
+.button1 {
+    width: 100%; 
+    height: 33%; 
+    text-align: center;
+    color: rgb(13, 7, 13);
+    display: inline-block;
+    font-size: 3vw; 
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    background-color: #3ee8fb; 
+    border: none;
+    cursor: pointer;
+    max-height: 100%;
+    transform-origin: center left;
+}
+
+/* 按钮在悬停时的样式 */
+.button1:hover {
+    background-color: #89ebff;
+    transform: scale(1.1); /* 按钮悬停时放大 */
+}
+
+/* 按钮在点击时的样式 */
+.button1:active {
+    background-color: #56c9e2;
+}
+
+/* 添加选中按钮的样式 */
+.button1.selected {
+    background-color: #00d9ff;
+    transform: scale(1.1);
+}
+
+.button2{
+    width: 100%; 
+    height: 33%; 
+    text-align: center;
+    color: rgb(13, 7, 13);
+    display: inline-block;
+    font-size: 3vw; 
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    background-color: #b06fff; 
+    border: none;
+    cursor: pointer;
+    max-height: 100%;
+    transform-origin: center left;
+}
+
+/* 按钮在悬停时的样式 */
+.button2:hover {
+    background-color: #c587ff;
+    transform: scale(1.1); /* 按钮悬停时放大 */
+}
+
+/* 按钮在点击时的样式 */
+.button2:active {
+    background-color: #9341df;
+}
+
+/* 添加选中按钮的样式 */
+.button2.selected {
+    background-color: #9900ff;
+    transform: scale(1.1);
+}
+
+.button3{
+    width: 100%; 
+    height: 33%; 
+    text-align: center;
+    color: rgb(13, 7, 13);
+    display: inline-block;
+    font-size: 3vw; 
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    background-color: #7af37e; 
+    border: none;
+    cursor: pointer;
+    max-height: 100%;
+    transform-origin: center left;
+}
+
+/* 按钮在悬停时的样式 */
+.button3:hover {
+    background-color: #87eb87;
+    transform: scale(1.1); /* 按钮悬停时放大 */
+}
+
+/* 按钮在点击时的样式 */
+.button3:active {
+    background-color: #56ff56;
+}
+
+/* 添加选中按钮的样式 */
+.button3.selected {
+    background-color: #00ff26;
+    transform: scale(1.1);
+}
+
+
+/*日期*/
+.container1 {
+    width: 100%; 
+    height: 70%; 
+    flex-direction: column; 
+    background-color: rgb(255, 254, 254);
+    text-align: center;
+    border: none;
+    display: flex;
+    font-size: 2vw;
+    font-weight: 500;
+    gap: 13vh;
+}
+
+.container1 input {
+    width: 50%; 
+    padding: 1vh;
+    font-size: 2.6vw;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.container1 input[type="date"] {
+    font-size: 3.5vw; /* 调整日期输入框中的文本字体大小 */
+}
+
+.container1 label {
+    font-size: 3vw; /* 调整标签字体大小 */
+}
+
+.error {
+    color: red;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* 为每个错误提示设置不同的位置 */
+#startDateError {
+    top: 46%;
+    left: 0;
+}
+
+#endDateError {
+    top: 70%;
+    left: 0;
+}
+
+.button4 {
+    position: relative;
+    bottom: -10%; /* 距离底部的距离 */
+    right: -70%; /* 距离右侧的距离 */
+    width: 10%; 
+    height: 11%; 
+    cursor: pointer;
+    text-align: center;
+    color: rgb(13, 7, 13);
+    display: inline-block;
+    border: none;
+    font-size: 2.5vw; 
+    border: 0.2vh solid #333; /* 添加边框样式 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    background-color: rgb(238, 238, 238) 
+}
+
+/* 按钮在悬停时的样式 */
+.button4:hover {
+    background-color: rgb(155, 155, 155);
+    transform: scale(1.1); /* 按钮悬停时放大 */
+}
+
+/* 按钮在点击时的样式 */
+.button4:active {
+    background-color: rgb(107, 107, 107);
+}
+
+.button4:disabled {
+    background-color: #747474;
+    cursor: not-allowed;
+}
+
+/* 新增的大盒子样式 */
+.result-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
+}
+
+.result-content {
+    position: fixed;
+    bottom: 21vh;
+    right: 10vw;
+    width: 80vw; 
+    height: 60vh;
+    font-size: 1.5vw;
+    border: 0.2vh solid #333; /* 添加边框样式 */
+}
+
+.result-content-1 {
+    position: fixed;
+    bottom: 21vh;
+    right: 10vw;
+    width: 75vw; 
+    height: 55vh;
+    font-size: 1.5vw;
+}
+
+/* 新增的返回按钮样式 */
+.back-button {
+    position: fixed;
+    bottom: 11vh;
+    right: 17vw;
+    width: 7vw; 
+    height: 7vh; 
+    text-align: center;
+    font-size: 2.5vw; 
+    cursor: pointer;
+    background-color: #bdc1c2;
+    color: #160606;
+    border: 0.2vh solid #333; /* 添加边框样式 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    max-height: 100%;
+}
+
+/* 按钮在悬停时的样式 */
+.back-button:hover {
+    background-color: rgb(73, 73, 73);
+    transform: scale(1.1); /* 按钮悬停时放大 */
+}
+
+/* 按钮在点击时的样式 */
+.back-button:active {
+    background-color: rgb(187, 187, 187);
+}

@@ -1,0 +1,16 @@
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    name: demoDB
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/challenger?serverTimezone=Asia/Shanghai
+    username: root
+    password: zou003089
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:/mybatis/mapper/*Mapper.xml
+server:
+  port: 8081
