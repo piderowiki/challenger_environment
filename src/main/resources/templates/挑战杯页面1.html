@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航栏示例</title>
+    <style>
+        a{
+            display: inline-block;
+            width: 180px;
+            height: 80px;
+            background-color: #3064bb;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            line-height: 80px;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 10px;
+        }
+      
+          a:hover{
+            background-color: #608bb9;
+        }
+        .box{
+            display: block;
+            width: 200px;
+            height:200px;
+            background-color:#bbbeb9;
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            line-height: 60px;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .container{
+            padding-left: 5%;
+            display: inline-block;
+            width: 250px;
+            height: 300px;
+        }
+        .container2 {
+            padding-right: 5%;
+            vertical-align: top;
+            width: 800px;
+            height: 300px;
+            margin: 0 0;
+            padding: 20px;
+            float: right;
+      }
+        .container3{
+            flex: 4;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: scroll;/*横向滑动*/
+            padding-right: 5%;
+            vertical-align: top;
+            width: 800px;
+            height: 250px;
+            padding: 20px;
+            float: right;
+            background-color: #608bb9;
+        }
+        .report {
+            margin-top: 20px;
+        }
+        .report button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .report button:hover {
+            background-color: #0056b3;
+        }
+
+        .areabox{
+            flex: 4;
+            background-color: #bbbeb9;
+            width: 100px;
+            height: 100px;
+            padding: 5%;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 5px;
+            margin: auto 10px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+          <ul>
+                <li><a href="#">用水</a></li>
+                <li><a href="#">用电</a></li>
+                <li><a href="#">碳排放</a></li>
+          </ul>
+    </div>
+    <!-- <button onclick="showReport()">显示报表</button> -->
+    <div class="container2">
+        <h1>快速报表页面</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>一月</th>
+                    <th>二月</th>
+                    <th>三月</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>数据1</td>
+                    <td>数据2</td>
+                    <td>数据3</td>
+                </tr>
+                <tr>
+                      <td>数据4</td>
+                      <td>数据5</td>
+                      <td>数据6</td>
+                </tr>
+                <tr>
+                    <td>数据7</td>
+                    <td>数据8</td>
+                    <td>数据9</td>
+                </tr>
+            </tbody>
+        </table>
+  </div>
+  <p></p>
+  <div class="container3">
+    <div class="areabox">区域1</div>
+    <div class="areabox">区域2</div>
+    <div class="areabox">区域3</div>
+     <div class="areabox">区域4</div>
+    <div class="areabox">区域5</div>
+    <div class="areabox">区域6</div>
+    <div class="areabox">区域7</div>
+    <div class="areabox">区域8</div> 
+  </div>
+    <script>
+        function showReport() {
+            var report = document.getElementById("report");
+            report.style.display = "block";
+        }
+        function hideReport() {
+            var report = document.getElementById("report");
+            report.style.display = "none";
+        }
+    </script>
+</body>
+</html>
