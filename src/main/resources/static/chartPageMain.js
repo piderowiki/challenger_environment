@@ -36,9 +36,9 @@ $(function () {
         })
     })
 
-
+    // 查周,但这马上要成为历史
     $("#week_btn").click(function () {
-        chooseType = 2;
+        chooseType = 4;
         $.ajax({
             url: "/main/chart/fresh",
             type:"POST",
@@ -46,9 +46,7 @@ $(function () {
             contentType:"application/json;charset=UTF-8",
             data:JSON.stringify({account:1,type:thisType,thisDate:{
                     year:thisYear,
-                    month:thisMonth,
-                    week:-1,
-                    day:thisDay
+                    month:thisMonth
                 }}),
             success:function (response) {
                 handleData(response,unit)
@@ -117,77 +115,92 @@ $(function () {
 
     $("#leftBtn").click(function () {
         // 这俩仅针对
-        var handleDate = new Date(thisYear,thisMonth,thisDay)
+        var dateStr = thisYear + "-" + thisMonth + "-" + thisDay
+        //alert(thisDay)
+        var handleDate = Date.parse(dateStr)
         var oneDay = 24 * 3600 * 1000
-        var nowTime = handleDate.getTime()
-        alert("现在的type是" + chooseType)
+
+        //alert("现在的type是" + nowTime)
+        //alert(handleDate)
         // 是年
         if(chooseType == 0){
             thisYear = thisYear - 1
             $("#year_btn").click()
         // 是月
         }else if(chooseType == 1){
+            thisYear = thisYear - 1
+            $("#month_btn").click()
+        }// 是周
+         // 还好这段已经废了
+        else if(chooseType == 2){
+            //ar newTime = new Date(nowTime)
+            //thisYear  = newTime.getFullYear()
+            //thisMonth = newTime.getMonth()+1
+            //thisDay   = newTime.getDate()
+            //alert(thisYear + "," +thisMonth+","+thisDay);
+            //$("#week_btn").click()
+        }// 是天
+            // 这段可能都有问题
+        else if(chooseType == 3){
+            var handleTime =handleDate - oneDay
+            var newTime = new Date(handleTime)
+            thisYear  = newTime.getFullYear()
+            thisMonth = newTime.getMonth()+1
+            thisDay   = newTime.getDate()
+            handleDate = new Date(thisYear,thisMonth,thisDay)
+
+            $("#day_btn").click()
+        }
+        else if(chooseType == 4){
             thisMonth = thisMonth - 1
             if(thisMonth == 0){
                 thisMonth = 12
                 thisYear = thisYear - 1
-                $("#month_btn").click()
             }
-        }// 是周
-        else if(chooseType == 2){
-            var handleTime =nowTime - 7 * oneDay
-            var newTime = new Date(handleTime)
-            thisYear  = newTime.getFullYear()
-            thisMonth = newTime.getMonth()+1
-            thisDay   = newTime.getDay()+1
-            alert(thisYear + "," +thisMonth+","+thisDay);
             $("#week_btn").click()
-        }// 是天
-        else if(chooseType == 3){
-            var handleTime =nowTime - oneDay
-            var newTime = new Date(handleTime)
-            thisYear  = newTime.getFullYear()
-            thisMonth = newTime.getMonth()+1
-            thisDay   = newTime.getDay()+1
-            $("#day_btn").click()
         }
     })
 
     $("#rightBtn").click(function () {
-        var handleDate = new Date(thisYear,thisMonth,thisDay)
+        var dateStr = thisYear + "-" + thisMonth + "-" + thisDay
+        //alert(thisYear + ","+thisMonth + ","+thisDay)
+        var nowTime = Date.parse(dateStr)
         var oneDay = 24 * 3600 * 1000
-        var nowTime = handleDate.getTime()
-        alert("现在的type是" + chooseType)
+
         // 是年
         if(chooseType == 0){
             thisYear = thisYear + 1
             $("#year_btn").click()
             // 是月
         }else if(chooseType == 1){
-            thisMonth = thisMonth + 1
-            if(thisMonth == 13){
-                thisMonth = 1
-                thisYear = thisYear + 1
-                $("#month_btn").click()
-            }
-        }// 是周
+            thisYear = thisYear + 1
+            $("#month_btn").click()
+        }// 是周,已经废了
         else if(chooseType == 2){
-            var handleTime =nowTime + 7 * oneDay
+/*            var handleTime =nowTime + 7 * oneDay
             var newTime = new Date(handleTime)
             thisYear  = newTime.getFullYear()
             thisMonth = newTime.getMonth()+1
             thisDay   = newTime.getDay()+1
             alert(thisYear + "," +thisMonth+","+thisDay);
-            $("#week_btn").click()
+            $("#week_btn").click()*/
         }// 是天
         else if(chooseType == 3){
             var handleTime =nowTime + oneDay
             var newTime = new Date(handleTime)
             thisYear  = newTime.getFullYear()
             thisMonth = newTime.getMonth()+1
-            thisDay   = newTime.getDay()+1
-            alert(thisYear + "," +thisMonth+","+thisDay);
+            thisDay   = newTime.getDate()
+            //alert("处理后的时间是"+thisDay);
             $("#day_btn").click()
+        }
+        else if(chooseType == 4){
+            thisMonth = thisMonth + 1
+            if(thisMonth == 13){
+                thisMonth = 1
+                thisYear = thisYear + 1
+            }
+            $("#week_btn").click()
         }
     })
 
@@ -197,6 +210,11 @@ $(function () {
 
 // unit是单位
 function handleData(response,unit) {
+    // 处理显示的文字
+    $("#show_date_area").text(
+        "当前选中"+thisYear+"年,"+thisMonth+"月,"+thisDay+"日"
+    )
+
     // 处理饼状图
     data_day = response.pieData
     myChart2.setOption({

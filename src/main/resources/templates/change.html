@@ -67,7 +67,7 @@
             <div class="f2_2">
                 <div class="f2_2_1">
                     <div class="f2_2_1_1_select">
-                        
+                        <!--在我的浏览器上文字会显示反掉,-->
                         <div class="f2_2_2_1-year" th:id="year_btn">
                             年
                         </div>
@@ -75,7 +75,7 @@
                             月
                         </div>
                         <div class="f2_2_2_1-week" th:id="week_btn">
-                            周
+                            本月
                         </div>
                         <div class="f2_2_2_1-day" th:id="day_btn" >
                             日
@@ -131,16 +131,26 @@
                 </div>
                 <div class="f2_2_2">
                     <div class="f2_2_2_1" id="f2_2_2_1">
-                      
+                        <p th:id="show_date_area">当前选中[[${ThisDateYear}]]年,[[${ThisDateMonth}]]月,
+                            [[${ThisDateDay}]]日</p>
+                      <!--
                         <p>今年 <span class="f2_2_2_1_1" id="年">100</span> mm</p>
                         <p>今月 <span class="f2_2_2_1_1">100</span> mm</p>
                         <p>今周 <span class="f2_2_2_1_1">100</span> mm</p>
                         <p>今日 <span class="f2_2_2_1_1">100</span> mm</p>
-                       
+                       -->
                     </div>
                     <div class="f2_2_2_2">
                         <div class="f2_2_2_2_1">
                             异常总结
+                            <p th:each="error,errorList:${RoughError}">
+                                <text th:text=" ${error.id}">1</text>
+                                <text>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</text>
+                                <text th:text=" ${error.name}">哈哈哈哈哈</text>
+                                <text>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</text>
+                                <text th:text=" ${error.urgency}">紧急</text>
+
+                            </p>
                         </div>
                     </div>
                 </div>
