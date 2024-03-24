@@ -1,6 +1,8 @@
 package com.ynu.challenger.service;
 
 import com.ynu.challenger.PO.CO2;
+import com.ynu.challenger.PO.Power;
+import com.ynu.challenger.PO.Water;
 import com.ynu.challenger.VO.*;
 import com.ynu.challenger.mapper.CO2Mapper;
 import com.ynu.challenger.mapper.PowerMapper;
@@ -101,23 +103,132 @@ public class ChartService {
                     area.setPercent(area.getPercent() * 100 / total);
                 }
                 // 柱状图的成长率部分得通过这部分计算得到
-                for (int i = 0; i < columnDataList.size(); i++) {
-                    ColumnData columnData = columnDataList.get(i);
-                    // 第一个或者前一项是0
-                    if(i == 0 || (columnDataList.get(i - 1).getData() == 0)){
-                        columnData.setGrowRate(0);
-                        continue;
-                    }
-                    ColumnData perData = columnDataList.get(i - 1);
-                    int growRate = (columnData.getData() - perData.getData()) * 100
-                            /(perData.getData());
-                    columnData.setGrowRate(growRate);
-                }
+                columnDataGetGrowRate(columnDataList);
 
                 break;
             case 1:
+                // 最近三年内的数据
+                List<Power> powerList1 = powerMapper.selectByAccountAndYear(account,year - 2);
+                List<Power> powerList2 = powerMapper.selectByAccountAndYear(account,year - 1);
+                List<Power> powerList3 = powerMapper.selectByAccountAndYear(account,year);
+                // 搞合并吧
+                powerList1.addAll(powerList2);
+                powerList1.addAll(powerList3);
+                // 这部分是PieData的部分
+                for (int i = 0; i < 3; i++) {
+                    PieData perYear = new PieData();
+                    perYear.setName("" + (year - 2 + i) + "年");
+                    pieDataList.add(perYear);
+                    // 这里还得补上
+                    ColumnData columnDataPerYear = new ColumnData();
+                    columnDataPerYear.setName("" + (year - 2 + i) + "年");
+                    columnDataList.add(columnDataPerYear);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> powerAreaMap = new HashMap<>();
+
+                // 接下来把三个部分统计
+                int powerTotal = 0;                           // 为最后计算百分比作准备
+                for (Power power : powerList1) {
+                    if(debug)System.out.println(power.getName());
+                    int co2Year = DateUtil.getDateYear(power.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(2 + co2Year - year);
+                    pieData.setValue(pieData.getValue() + power.getAmount());
+                    ColumnData columnData = columnDataList.get(2 + co2Year - year);
+                    columnData.setData(columnData.getData() + power.getAmount());
+                    // 这是area的部分
+                    powerTotal += power.getAmount();
+                    String areaName = power.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = powerAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + power.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(power.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        powerAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / powerTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
+
                 break;
             default:
+                // 最近三年内的数据
+                List<Water> waterList1 = waterMapper.selectByAccountAndYear(account,year - 2);
+                List<Water> waterList2 = waterMapper.selectByAccountAndYear(account,year - 1);
+                List<Water> waterList3 = waterMapper.selectByAccountAndYear(account,year);
+                // 搞合并吧
+                waterList1.addAll(waterList2);
+                waterList1.addAll(waterList3);
+                // 这部分是PieData的部分
+                for (int i = 0; i < 3; i++) {
+                    PieData perYear = new PieData();
+                    perYear.setName("" + (year - 2 + i) + "年");
+                    pieDataList.add(perYear);
+                    // 这里还得补上
+                    ColumnData columnDataPerYear = new ColumnData();
+                    columnDataPerYear.setName("" + (year - 2 + i) + "年");
+                    columnDataList.add(columnDataPerYear);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> waterAreaMap = new HashMap<>();
+
+                // 接下来把三个部分统计
+                int waterTotal = 0;                           // 为最后计算百分比作准备
+                for (Water water : waterList1) {
+                    if(debug)System.out.println(water.getName());
+                    int co2Year = DateUtil.getDateYear(water.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(2 + co2Year - year);
+                    pieData.setValue(pieData.getValue() + water.getAmount());
+                    ColumnData columnData = columnDataList.get(2 + co2Year - year);
+                    columnData.setData(columnData.getData() + water.getAmount());
+                    // 这是area的部分
+                    waterTotal += water.getAmount();
+                    String areaName = water.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = waterAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + water.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(water.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        waterAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / waterTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
+
                 break;
         }
 
@@ -153,64 +264,175 @@ public class ChartService {
 
         switch (type){
             case 0:
+                List<CO2> co2List = new ArrayList<>();
+                for (int i = 0; i < thisSelectMonth; i++) {
+                    co2List.addAll(co2Mapper.selectByAccountAndYearAndMonth(account,year,i+1));
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "月");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "月");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> areaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int total = 0;                           // 为最后计算百分比作准备
+                for (CO2 co2 : co2List) {
+                    if(debug)System.out.println(co2.getName());
+                    int co2Month = DateUtil.getDateMonth(co2.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Month);
+                    pieData.setValue(pieData.getValue() + co2.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Month);
+                    columnData.setData(columnData.getData() + co2.getAmount());
+                    // 这是area的部分
+                    total += co2.getAmount();
+                    String areaName = co2.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = areaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + co2.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(co2.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        areaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / total);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
                 break;
+
             case 1:
+                List<Power> powerList = new ArrayList<>();
+                for (int i = 0; i < thisSelectMonth; i++) {
+                    powerList.addAll(powerMapper.selectByAccountAndYearAndMonth(account,year,i+1));
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "月");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "月");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> powerAreaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int powerTotal = 0;                           // 为最后计算百分比作准备
+                for (Power power : powerList) {
+                    if(debug)System.out.println(power.getName());
+                    int co2Month = DateUtil.getDateMonth(power.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Month);
+                    pieData.setValue(pieData.getValue() + power.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Month);
+                    columnData.setData(columnData.getData() + power.getAmount());
+                    // 这是area的部分
+                    powerTotal += power.getAmount();
+                    String areaName = power.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = powerAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + power.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(power.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        powerAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / powerTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
+
                 break;
             default:
+                List<Water> waterList = new ArrayList<>();
+                for (int i = 0; i < thisSelectMonth; i++) {
+                    waterList.addAll(waterMapper.selectByAccountAndYearAndMonth(account,year,i+1));
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "月");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "月");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> waterAreaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int waterTotal = 0;                           // 为最后计算百分比作准备
+                for (Water water : waterList) {
+                    if(debug)System.out.println(water.getName());
+                    int co2Month = DateUtil.getDateMonth(water.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Month);
+                    pieData.setValue(pieData.getValue() + water.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Month);
+                    columnData.setData(columnData.getData() + water.getAmount());
+                    // 这是area的部分
+                    waterTotal += water.getAmount();
+                    String areaName = water.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = waterAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + water.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(water.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        waterAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / waterTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
                 break;
         }
 
-        List<CO2> co2List = new ArrayList<>();
-        for (int i = 0; i < thisSelectMonth; i++) {
-            co2List.addAll(co2Mapper.selectByAccountAndYearAndMonth(account,year,i+1));
-            // 这里也合并掉,包括PieData和ColumnData
-            PieData perData= new PieData();
-            perData.setName("" + (i + 1) + "月");
-            pieDataList.add(perData);
-            ColumnData columnDataPerData = new ColumnData();
-            columnDataPerData.setName("" + (i + 1) + "月");
-            columnDataList.add(columnDataPerData);
-        }
-        // 统计已经出现过的area
-        Map<String,Integer> areaMap = new HashMap<>();
-        // 接下来把三个部分统计
-        int total = 0;                           // 为最后计算百分比作准备
-        for (CO2 co2 : co2List) {
-            if(debug)System.out.println(co2.getName());
-            int co2Month = DateUtil.getDateMonth(co2.getDate());
-            // 获取到对应的年份
-            PieData pieData = pieDataList.get(co2Month);
-            pieData.setValue(pieData.getValue() + co2.getAmount());
-            ColumnData columnData = columnDataList.get(co2Month);
-            columnData.setData(columnData.getData() + co2.getAmount());
-            // 这是area的部分
-            total += co2.getAmount();
-            String areaName = co2.getArea();
+        return chartData;
+    }
 
-            // 如果之前查的到,就查出位置,然后先累加上
-            Integer areaNumber = areaMap.get(areaName);
-            if(areaNumber != null){
-                AreaPercent areaPercent = areaPercentList.get(areaNumber);
-                areaPercent.setPercent(areaPercent.getPercent() + co2.getAmount());
-                // 发现查不到,那就说明需要新处理
-            }else {
-                // 已有元素个数
-                int size = areaPercentList.size();
-                AreaPercent areaPercent = new AreaPercent();
-                areaPercent.setAreaName(areaName);
-                // 暂时先记录数字,最后处理成百分比
-                areaPercent.setPercent(co2.getAmount());
-                // 添加上去
-                areaPercentList.add(areaPercent);
-                areaMap.put(areaName,size);
-            }
-            // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
-        }
-        // 将数值转化为百分比
-        for (AreaPercent area : areaPercentList) {
-            area.setPercent(area.getPercent() * 100 / total);
-        }
-        // 柱状图的成长率部分得通过这部分计算得到
+    private void columnDataGetGrowRate(List<ColumnData> columnDataList) {
         for (int i = 0; i < columnDataList.size(); i++) {
             ColumnData columnData = columnDataList.get(i);
             // 第一个或者前一项是0
@@ -223,8 +445,6 @@ public class ChartService {
                     /(perData.getData());
             columnData.setGrowRate(growRate);
         }
-
-        return chartData;
     }
 
     public ChartData yearAndMonthAndWeek(ChartReceiveData chartReceiveData){
@@ -301,18 +521,7 @@ public class ChartService {
                     area.setPercent(area.getPercent() * 100 / total);
                 }
                 // 柱状图的成长率部分得通过这部分计算得到
-                for (int i = 0; i < columnDataList.size(); i++) {
-                    ColumnData columnData = columnDataList.get(i);
-                    // 第一个或者前一项是0
-                    if(i == 0 || (columnDataList.get(i - 1).getData() == 0)){
-                        columnData.setGrowRate(0);
-                        continue;
-                    }
-                    ColumnData perData = columnDataList.get(i - 1);
-                    int growRate = (columnData.getData() - perData.getData()) * 100
-                            /(perData.getData());
-                    columnData.setGrowRate(growRate);
-                }
+                columnDataGetGrowRate(columnDataList);
 
                 break;
             case 1:
@@ -408,23 +617,120 @@ public class ChartService {
                     area.setPercent(area.getPercent() * 100 / total);
                 }
                 // 柱状图的成长率部分得通过这部分计算得到
-                for (int i = 0; i < columnDataList.size(); i++) {
-                    ColumnData columnData = columnDataList.get(i);
-                    // 第一个或者前一项是0
-                    if(i == 0 || (columnDataList.get(i - 1).getData() == 0)){
-                        columnData.setGrowRate(0);
-                        continue;
-                    }
-                    ColumnData perData = columnDataList.get(i - 1);
-                    int growRate = (columnData.getData() - perData.getData()) * 100
-                            /(perData.getData());
-                    columnData.setGrowRate(growRate);
-                }
+                columnDataGetGrowRate(columnDataList);
 
                 break;
             case 1:
+                List<Power> powerList = new ArrayList<>();
+                // 只有一行
+                powerList.addAll(powerMapper.selectByAccountAndYearAndMonthAndDay(account,year,month,day));
+                for (int i = 0; i < hourToCount; i++) {
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "h");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "h");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> powerAreaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int powerTotal = 0;                           // 为最后计算百分比作准备
+                for (Power power : powerList) {
+                    if(debug)System.out.println(power.getName());
+                    if(debug) System.out.println(power.getDate());
+                    int co2Hour = DateUtil.getDateHour(power.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Hour);
+                    pieData.setValue(pieData.getValue() + power.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Hour);
+                    columnData.setData(columnData.getData() + power.getAmount());
+                    // 这是area的部分
+                    powerTotal += power.getAmount();
+                    String areaName = power.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = powerAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + power.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(power.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        powerAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / powerTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
                 break;
             default:
+                List<Water> waterList = new ArrayList<>();
+                // 只有一行
+                waterList.addAll(waterMapper.selectByAccountAndYearAndMonthAndDay(account,year,month,day));
+                for (int i = 0; i < hourToCount; i++) {
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "h");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "h");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> waterAreaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int waterTotal = 0;                           // 为最后计算百分比作准备
+                for (Water water : waterList) {
+                    if(debug)System.out.println(water.getName());
+                    if(debug) System.out.println(water.getDate());
+                    int co2Hour = DateUtil.getDateHour(water.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Hour);
+                    pieData.setValue(pieData.getValue() + water.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Hour);
+                    columnData.setData(columnData.getData() + water.getAmount());
+                    // 这是area的部分
+                    waterTotal += water.getAmount();
+                    String areaName = water.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = waterAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + water.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(water.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        waterAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / waterTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
 
                 break;
         }
@@ -513,22 +819,115 @@ public class ChartService {
                     area.setPercent(area.getPercent() * 100 / total);
                 }
                 // 柱状图的成长率部分得通过这部分计算得到
-                for (int i = 0; i < columnDataList.size(); i++) {
-                    ColumnData columnData = columnDataList.get(i);
-                    // 第一个或者前一项是0
-                    if(i == 0 || (columnDataList.get(i - 1).getData() == 0)){
-                        columnData.setGrowRate(0);
-                        continue;
-                    }
-                    ColumnData perData = columnDataList.get(i - 1);
-                    int growRate = (columnData.getData() - perData.getData()) * 100
-                            /(perData.getData());
-                    columnData.setGrowRate(growRate);
-                }
+                columnDataGetGrowRate(columnDataList);
                 break;
             case 1:
+                List<Power> powerList = new ArrayList<>();
+                powerList.addAll(powerMapper.selectByAccountAndYearAndMonth(account,year,month));
+                for (int i = 0; i < thisSelectMonth; i++) {
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "号");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "号");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> powerAreaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int powerTotal = 0;                           // 为最后计算百分比作准备
+                for (Power power : powerList) {
+                    if(debug)System.out.println(power.getName());
+                    int co2Day = DateUtil.getDateDay(power.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Day - 1);
+                    pieData.setValue(pieData.getValue() + power.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Day - 1);
+                    columnData.setData(columnData.getData() + power.getAmount());
+                    // 这是area的部分
+                    powerTotal += power.getAmount();
+                    String areaName = power.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = powerAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + power.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(power.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        powerAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / powerTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
                 break;
             default:
+                List<Water> waterList = new ArrayList<>();
+                waterList.addAll(waterMapper.selectByAccountAndYearAndMonth(account,year,month));
+                for (int i = 0; i < thisSelectMonth; i++) {
+                    // 这里也合并掉,包括PieData和ColumnData
+                    PieData perData= new PieData();
+                    perData.setName("" + (i + 1) + "号");
+                    pieDataList.add(perData);
+                    ColumnData columnDataPerData = new ColumnData();
+                    columnDataPerData.setName("" + (i + 1) + "号");
+                    columnDataList.add(columnDataPerData);
+                }
+                // 统计已经出现过的area
+                Map<String,Integer> waterAreaMap = new HashMap<>();
+                // 接下来把三个部分统计
+                int waterTotal = 0;                           // 为最后计算百分比作准备
+                for (Water water : waterList) {
+                    if(debug)System.out.println(water.getName());
+                    int co2Day = DateUtil.getDateDay(water.getDate());
+                    // 获取到对应的年份
+                    PieData pieData = pieDataList.get(co2Day - 1);
+                    pieData.setValue(pieData.getValue() + water.getAmount());
+                    ColumnData columnData = columnDataList.get(co2Day - 1);
+                    columnData.setData(columnData.getData() + water.getAmount());
+                    // 这是area的部分
+                    waterTotal += water.getAmount();
+                    String areaName = water.getArea();
+
+                    // 如果之前查的到,就查出位置,然后先累加上
+                    Integer areaNumber = waterAreaMap.get(areaName);
+                    if(areaNumber != null){
+                        AreaPercent areaPercent = areaPercentList.get(areaNumber);
+                        areaPercent.setPercent(areaPercent.getPercent() + water.getAmount());
+                        // 发现查不到,那就说明需要新处理
+                    }else {
+                        // 已有元素个数
+                        int size = areaPercentList.size();
+                        AreaPercent areaPercent = new AreaPercent();
+                        areaPercent.setAreaName(areaName);
+                        // 暂时先记录数字,最后处理成百分比
+                        areaPercent.setPercent(water.getAmount());
+                        // 添加上去
+                        areaPercentList.add(areaPercent);
+                        waterAreaMap.put(areaName,size);
+                    }
+                    // 最后是柱状图部分,这部分其实和PieChart部分几乎一模一样。
+                }
+                // 将数值转化为百分比
+                for (AreaPercent area : areaPercentList) {
+                    area.setPercent(area.getPercent() * 100 / waterTotal);
+                }
+                // 柱状图的成长率部分得通过这部分计算得到
+                columnDataGetGrowRate(columnDataList);
                 break;
         }
 

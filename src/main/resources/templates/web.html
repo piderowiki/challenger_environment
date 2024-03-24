@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <base th:href="@{/}" href="../static/">
+    <link rel="stylesheet" href="styles.css">
+    <!-- <script src="test.js" defer="defer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<div class="total">
+    <div class="f1">
+        <div class="f1_1">
+            <img src="picture/logo.png" alt="Paris">
+        </div>
+        能源管理-智慧能碳管理平台
+    </div>
+    <div class="f2">
+        <div class="f2_1">
+
+            <div class="f2_1_1">
+                <div class="f2_1_2_1">
+                    <a style="text-decoration: none" class="f2_1_2_1-button-1" th:href="@{/main/chart/water}">
+                        <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                        用水总览
+                    </a>
+                    <a style="text-decoration: none"  class="f2_1_2_1-button-2" th:href="@{/main/chart/power}">
+                        <img src="picture/电表.png" alt="Paris" width="20" height="20" align-items="center">
+                        用电总览
+                    </a>
+                    <a style="text-decoration: none"  class="f2_1_2_1-button-3" th:href="@{/main/chart/co2}">
+                        <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                        碳排放总览
+                    </a>
+                    <!--                        <a style="text-decoration: none"  class="f2_1_2_1-button-4">
+                                                <img src="picture/报表.png" alt="Paris" width="20" height="20" align-items="center">
+                                                报表
+                                            </a>-->
+                    <a style="text-decoration: none"  class="f2_1_2_1-button-5">
+                        <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                        数据分析
+                    </a>
+                    <a style="text-decoration: none"  class="f2_1_2_1-button-6">
+                        <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
+                        实时报修
+                    </a>
+                </div>
+                <div class="f2_1_2_2">
+
+                </div>
+            </div>
+        </div>
+        <div class="f2_2">
+            <div class="f2_2_1">
+                <div class="container">
+                    <div class="top-left">
+                        <p style="color: rgb(107,18,24);">电表位置</p>
+                        <select name="select1" id="select1">
+                            <option disabled selected hidden style="color: rgba(128, 128, 128, 0);">请选择</option>
+                            <option value="option1">区域A</option>
+                            <option value="option2">区域B</option>
+                            <option value="option3">区域C</option>
+                        </select>
+                    </div>
+                    <div class="top-right">
+                        <p style="color: rgb(107,18,24);">电表状态</p>
+                        <select name="select2" id="select2">
+                            <option disabled selected hidden style="color: rgba(128, 128, 128, 0.5);">请选择</option>
+                            <option value="option4">待维修</option>
+                            <option value="option5">已维修</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="round-button">查询</button>
+                <button class="round-button2">重置</button>
+            </div>
+            <div class="f2_2_2">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th style="color: #503d1d;">电表位置</th>
+                        <th style="color: #503d1d;">报修时间</th>
+                        <th style="color: #503d1d;">更新时间</th>
+                        <th style="color: #503d1d;">故障原因</th>
+                        <th style="color: #503d1d;">维修状态</th>
+                    </tr>
+                    <tr>
+                        <td style="color: #503d1d;">1</td>
+                        <td>区域1</td>
+                        <td>2023.6.18</td>
+                        <td>2023.6.20</td>
+                        <td>用水异常30立方米</td>
+                        <td>已完成</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #503d1d;">2</td>
+                        <td>区域2</td>
+                        <td>2023.7.12</td>
+                        <td>2023.7.15</td>
+                        <td>用电监测设备故障</td>
+                        <td>未完成</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #503d1d;">3</td>
+                        <td>区域3</td>
+                        <td>2023.8.11</td>
+                        <td>2023.8.18</td>
+                        <td>用电异常200度</td>
+                        <td>已完成</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #503d1d;">4</td>
+                        <td>区域4</td>
+                        <td>2023.10.5</td>
+                        <td>2023.10.15</td>
+                        <td>碳排放监测设备损坏</td>
+                        <td>未完成</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pagination">
+                <a href="#">&laquo; 上一页</a> <!-- 左箭头表示上一页 -->
+                <span>第
+                    <?php echo $currentPage; ?>
+                    页
+                    </span> <!-- 后台动态生成当前页数 -->
+                <a href="#">下一页 &raquo;</a> <!-- 右箭头表示下一页 -->
+            </div>
+            <!-- 后台动态生成当前页数
+            <div id="page-number" class="page-number">
+
+            </div>
+-->
+
+
+
+
+        </div>
+    </div>
+</div>
+<script src="web.js"></script>
+</body>
+
+</html>

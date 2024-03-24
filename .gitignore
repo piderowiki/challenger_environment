@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### 密码 ###
+/src/main/resources/application.yml

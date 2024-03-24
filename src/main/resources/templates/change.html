@@ -16,7 +16,7 @@
         thisDay = [[${ThisDateDay}]];
         thisType = [[${type}]];
         // 0是year,1是month,2是week,3是day
-        chooseType = 0;
+        chooseType = [[${type}]];
     </script>
 
     <script src="chartPageMain.js" defer = "defer"></script>
@@ -25,7 +25,7 @@
     <div class="total">
         <div class="f1">
             <div class="f1_1">
-                <img src="picture/电.png" alt="Paris" >
+                <img src="picture/logo.png" alt="Paris" >
             </div>
             能源管理-智慧能碳管理平台
         </div>
@@ -34,30 +34,30 @@
                 
                 <div class="f2_1_1">
                     <div class="f2_1_2_1">
-                        <div class="f2_1_2_1-button-1">
+                        <a style="text-decoration: none" class="f2_1_2_1-button-1" th:href="@{/main/chart/water}">
                             <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
                             用水总览
-                        </div>
-                        <div class="f2_1_2_1-button-2">
+                        </a>
+                        <a style="text-decoration: none"  class="f2_1_2_1-button-2" th:href="@{/main/chart/power}">
                             <img src="picture/电表.png" alt="Paris" width="20" height="20" align-items="center">
                             用电总览
-                        </div>
-                        <div class="f2_1_2_1-button-3">
+                        </a>
+                        <a style="text-decoration: none"  class="f2_1_2_1-button-3" th:href="@{/main/chart/co2}">
                             <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
                             碳排放总览
-                        </div>
-                        <div class="f2_1_2_1-button-4">
+                        </a>
+<!--                        <a style="text-decoration: none"  class="f2_1_2_1-button-4">
                             <img src="picture/报表.png" alt="Paris" width="20" height="20" align-items="center">
                             报表
-                        </div>
-                        <div class="f2_1_2_1-button-5">
+                        </a>-->
+                        <a style="text-decoration: none"  class="f2_1_2_1-button-5">
                             <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
                             数据分析
-                        </div>
-                        <div class="f2_1_2_1-button-6">
+                        </a>
+                        <a style="text-decoration: none"  class="f2_1_2_1-button-6">
                             <img src="picture/水表.png" alt="Paris" width="20" height="20" align-items="center">
                             实时报修
-                        </div>
+                        </a>
                     </div>
                     <div class="f2_1_2_2">
 

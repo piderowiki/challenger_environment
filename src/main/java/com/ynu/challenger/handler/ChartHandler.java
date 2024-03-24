@@ -42,6 +42,44 @@ public class ChartHandler {
         return mav;
     }
 
+    @RequestMapping("/main/chart/water")
+    public ModelAndView WaterChartHandler(){
+        // 这里我们把东西塞进那个什么东西里面
+        ModelAndView mav = new ModelAndView();
+        // 日期数据
+        mav.addObject("ThisDateYear",DateUtil.getThisYear());
+        mav.addObject("ThisDateMonth",DateUtil.getThisMonth());
+        mav.addObject("ThisDateWeek", DateUtil.getThisWeek());
+        mav.addObject("ThisDateDay",DateUtil.getThisDay());
+        // 类型数据
+        mav.addObject("type",2);
+        // 错误数据
+        List<ErrorEasy> roughError = errorService.getRoughError(1);
+        mav.addObject("RoughError",roughError);
+
+        mav.setViewName("change");
+        return mav;
+    }
+
+    @RequestMapping("/main/chart/power")
+    public ModelAndView PowerChartHandler(){
+        // 这里我们把东西塞进那个什么东西里面
+        ModelAndView mav = new ModelAndView();
+        // 日期数据
+        mav.addObject("ThisDateYear",DateUtil.getThisYear());
+        mav.addObject("ThisDateMonth",DateUtil.getThisMonth());
+        mav.addObject("ThisDateWeek", DateUtil.getThisWeek());
+        mav.addObject("ThisDateDay",DateUtil.getThisDay());
+        // 类型数据
+        mav.addObject("type",1);
+        // 错误数据
+        List<ErrorEasy> roughError = errorService.getRoughError(1);
+        mav.addObject("RoughError",roughError);
+
+        mav.setViewName("change");
+        return mav;
+    }
+
     @ResponseBody
     @RequestMapping("/main/chart/fresh")
     // 根据日期来完成查询
